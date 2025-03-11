@@ -42,7 +42,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> SalesDataADLS",
-				"SalesDataADLS filter(SALES>2000) ~> AmountBasedFilter",
+				"SalesDataADLS filter(SALES>='2000') ~> AmountBasedFilter",
 				"AmountBasedFilter sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
