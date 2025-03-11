@@ -1,5 +1,5 @@
 {
-	"name": "SnowflakeTable1",
+	"name": "Sales_Data_Destination",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Destination_Sales_Data",
