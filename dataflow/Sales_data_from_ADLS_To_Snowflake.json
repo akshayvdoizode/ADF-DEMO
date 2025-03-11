@@ -12,8 +12,20 @@
 					"name": "SalesDataADLS"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Sales_Data_Destination",
+						"type": "DatasetReference"
+					},
+					"name": "Snowflake"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AmountBasedFilter"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          ORDERNUMBER as string,",
@@ -29,7 +41,30 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> SalesDataADLS"
+				"     ignoreNoFilesFound: false) ~> SalesDataADLS",
+				"SalesDataADLS filter(SALES>2000) ~> AmountBasedFilter",
+				"AmountBasedFilter sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          ORDERNUMBER as decimal(38,0),",
+				"          QUANTITYORDERED as decimal(38,0),",
+				"          PRICEEACH as double,",
+				"          ORDERLINENUMBER as decimal(38,0),",
+				"          SALES as double,",
+				"          ORDERDATE as date,",
+				"          STATUS as string,",
+				"          QTR_ID as decimal(38,0),",
+				"          MONTH_ID as decimal(38,0),",
+				"          YEAR_ID as decimal(38,0)",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true) ~> Snowflake"
 			]
 		}
 	}
