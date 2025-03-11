@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "Adf-project-1-avdoyizode"
+		},
+		"Destination_Sales_Data_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Destination_Sales_Data'"
+		},
+		"Sales_source_data_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Sales_source_data'"
+		},
+		"Destination_Sales_Data_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "SALES"
+		},
+		"Destination_Sales_Data_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "ACCOUNTADMIN"
+		},
+		"Destination_Sales_Data_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "VRFNVBY-SG32738.snowflakecomputing.com"
+		},
+		"Sales_source_data_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adfprojectavd.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "Adf-project-1-avdoyizode_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Destination_Sales_Data_password": {
+						"value": "[parameters('Destination_Sales_Data_password')]"
+					},
+					"Sales_source_data_accountKey": {
+						"value": "[parameters('Sales_source_data_accountKey')]"
+					},
+					"Destination_Sales_Data_properties_typeProperties_database": {
+						"value": "[parameters('Destination_Sales_Data_properties_typeProperties_database')]"
+					},
+					"Destination_Sales_Data_properties_typeProperties_role": {
+						"value": "[parameters('Destination_Sales_Data_properties_typeProperties_role')]"
+					},
+					"Destination_Sales_Data_properties_typeProperties_host": {
+						"value": "[parameters('Destination_Sales_Data_properties_typeProperties_host')]"
+					},
+					"Sales_source_data_properties_typeProperties_url": {
+						"value": "[parameters('Sales_source_data_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

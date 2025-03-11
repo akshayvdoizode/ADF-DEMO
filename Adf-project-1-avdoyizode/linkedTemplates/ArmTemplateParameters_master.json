@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "Adf-project-1-avdoyizode"
+		},
+		"Destination_Sales_Data_password": {
+			"value": ""
+		},
+		"Sales_source_data_accountKey": {
+			"value": ""
+		},
+		"Destination_Sales_Data_properties_typeProperties_database": {
+			"value": "SALES"
+		},
+		"Destination_Sales_Data_properties_typeProperties_role": {
+			"value": "ACCOUNTADMIN"
+		},
+		"Destination_Sales_Data_properties_typeProperties_host": {
+			"value": "VRFNVBY-SG32738.snowflakecomputing.com"
+		},
+		"Sales_source_data_properties_typeProperties_url": {
+			"value": "https://adfprojectavd.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
